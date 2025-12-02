@@ -1,8 +1,8 @@
 // src/components/SignIn.jsx
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import "./css/auth.css";
-import { auth } from "./firebase";
+import "../css/auth.css";
+import { auth } from "../firebase";
 import {
   GoogleAuthProvider,
   signInWithPopup,

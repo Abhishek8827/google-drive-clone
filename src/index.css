@@ -1,6 +1,14 @@
-  *{
+/* src/index.css */
+
+/* =========================================
+   1. GLOBAL RESET & BASE STYLES
+   ========================================= */
+* {
   margin: 0;
-  overflow: hidden;
+  padding: 0;
+  box-sizing: border-box;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
 }
 
 body {
@@ -10,114 +18,191 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  /* --- DEFAULT LIGHT THEME VARIABLES --- */
+  --bg: #f8fafd;
+  --text: #202124;
+  --muted: #5f6368;
+  --accent: #1a73e8;
+  --border: #e6e6e6;
+  --card-bg: #ffffff;
+  --hover-bg: rgba(0, 0, 0, 0.04);
+  --icon-bg: #f6f7f8;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/* =========================================
+   2. DARK MODE VARIABLES
+   ========================================= */
+body.dark-mode {
+  --bg: #181818;
+  --text: #e8eaed;
+  --muted: #9aa0a6;
+  --accent: #8ab4f8;
+  --border: #3c4043;
+  --card-bg: #202124;
+  --hover-bg: rgba(255, 255, 255, 0.08);
+  --icon-bg: #303134;
+
+  background-color: var(--bg) !important;
+  color: var(--text) !important;
 }
 
-.App{
-  display: grid;
-  grid-template-columns: 220px auto 140px;
-   width: 100%; 
-}
-
-
-:root {
-  --header-height: 60px;  
-}
-
-.header {
-  height: var(--header-height);
-  min-height: var(--header-height);
-  top: 0;
-  position: sticky;  
-  z-index: 1400;      
-}
-
-@media (max-width: 520px) {
-  .sidebar {
-    position: fixed;
-    left: 0;
-    top: var(--header-height);  
-    height: calc(100vh - var(--header-height));
-    z-index: 1100;  
-  }
-
-  .right-sidebar {
-    position: fixed;
-    right: 0;
-    top: var(--header-height);
-    height: calc(100vh - var(--header-height));
-    z-index: 1100;
-  }
-
-  .app-shell,
-  .drive-main,
-  .main-center {
-    padding-top: var(--header-height);
-  }
-  .header_search { max-width: calc(100% - 120px); }  
-} 
-
-/* index.css - global layout */
-* {
-  box-sizing: border-box;
-}
-
-html, body, #root {
-  height: 100%;
-  margin: 0;
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-}
-
-/* App root: header on top, shell fills remaining height */
+/* =========================================
+   3. APP LAYOUT
+   ========================================= */
 .app-root {
-  height: 100vh;               /* full viewport height */
+  height: 100vh;
   display: flex;
-  flex-direction: column;      /* header then shell */
-  background: #f6f7fb;
+  flex-direction: column;
+  background: var(--bg);
+  color: var(--text);
+  transition: background 0.2s ease, color 0.2s ease;
 }
 
-/* Example header. If your Header uses other styles, adjust height accordingly */
-.header {
-  height: 64px;
-  min-height: 64px;
-  display: flex;
-  align-items: center;
-  padding: 0 16px;
-  background: #fff;
-  box-shadow: 0 1px 0 rgba(0,0,0,0.06);
-  z-index: 3;
-}
-
-/* Shell holds sidebar + main content side-by-side */
 .app-shell {
-  display: flex;        /* IMPORTANT: side-by-side layout */
-  align-items: stretch; /* make children full height */
-  flex: 1 1 0;
-  min-height: 0;        /* allow children with overflow to scroll */
-  overflow: hidden;     /* internal scrolling only */
+  display: flex;
+  align-items: stretch;
+  flex: 1;
+  overflow: hidden;
 }
 
-/* Main content area (Data) */
-.data-main, .data {
-  flex: 1 1 0;          /* grow to fill remaining width */
-  min-width: 0;         /* allow inner content to shrink and overflow-x to work */
-  min-height: 0;        /* allow vertical scroll inside */
-  overflow: auto;       /* scroll content if taller than available space */
-  padding: 20px;
-  background: white;
+/* =========================================
+   4. DARK MODE COMPONENT OVERRIDES
+   (Using !important to override component CSS)
+   ========================================= */
+
+/* --- SIDEBAR --- */
+.dark-mode .sidebar {
+  background-color: var(--bg) !important;
+  border-right-color: var(--border) !important;
+  color: var(--text) !important;
 }
 
-/* Small responsive helper when sidebar is collapsed */
-@media (max-width: 720px) {
-  .app-shell {
-    flex-direction: column;
-  }
+.dark-mode .nav-icon,
+.dark-mode .folder-icon,
+.dark-mode .sidebar-new-icon-btn .material-symbols-outlined,
+.dark-mode .sidebar-collapse-btn .material-symbols-outlined {
+  color: var(--text) !important;
+}
 
-  .data-main {
-    padding: 12px;
-  }
+.dark-mode .sidebar-new-btn {
+  color: white !important; /* Keep "New" button text white */
+}
+
+/* --- MAIN DATA AREA --- */
+.dark-mode .data {
+  background-color: var(--bg) !important;
+  border-top-color: var(--border) !important;
+  color: var(--text) !important;
+}
+
+/* Grid View Cards */
+.dark-mode .data_file {
+  background-color: var(--card-bg) !important;
+  border-color: var(--border) !important;
+  color: var(--text) !important;
+}
+
+.dark-mode .data_file p {
+  background-color: #2b2c2f !important;
+  color: var(--text) !important;
+  border-top-color: var(--border) !important;
+}
+
+/* List View Rows */
+.dark-mode .detailsRow {
+  background-color: transparent !important;
+  border-bottom-color: var(--border) !important;
+  color: var(--text) !important;
+}
+
+.dark-mode .detailsRow:hover {
+  background-color: var(--hover-bg) !important;
+}
+
+.dark-mode .colName b,
+.dark-mode .detailsRow p {
+  color: var(--text) !important;
+}
+
+/* --- HEADER & SEARCH --- */
+.dark-mode .header {
+  background-color: var(--bg) !important;
+  border-bottom-color: var(--border) !important;
+}
+
+.dark-mode .logo_text {
+  color: var(--text) !important;
+}
+
+.dark-mode .header_search {
+  background-color: var(--icon-bg) !important;
+}
+
+.dark-mode .header_search input {
+  color: var(--text) !important;
+}
+
+.dark-mode .header_search .material-symbols-outlined {
+  color: var(--muted) !important;
+}
+
+.dark-mode .header-icon,
+.dark-mode .appsBtn,
+.dark-mode .signoutBtn {
+  color: var(--text) !important;
+  background: transparent !important;
+}
+
+.dark-mode .header-icon:hover,
+.dark-mode .appsBtn:hover,
+.dark-mode .signoutBtn:hover {
+  background: var(--hover-bg) !important;
+}
+
+/* --- MODALS & POPUPS --- */
+.dark-mode .appsDialog,
+.dark-mode .profileDialog,
+.dark-mode .fileModal,
+.dark-mode .confirmModal,
+.dark-mode .uploadPopup {
+  background-color: var(--card-bg) !important;
+  color: var(--text) !important;
+  border-color: var(--border) !important;
+}
+
+.dark-mode .appIconWrap {
+  background-color: var(--icon-bg) !important;
+}
+
+.dark-mode .appTileSvg,
+.dark-mode .appTitle {
+  color: var(--text) !important;
+}
+
+/* --- BUTTONS & INPUTS --- */
+.dark-mode .iconBtn,
+.dark-mode .actionBtn {
+  background-color: var(--card-bg) !important;
+  color: var(--text) !important;
+  border-color: var(--border) !important;
+}
+
+/* Fix for "My Drive" Dropdown Button */
+.dark-mode .driveArrowBtn,
+.dark-mode .driveLabelText,
+.dark-mode .driveArrowBtn .material-symbols-outlined {
+  color: var(--text) !important;
+}
+
+.dark-mode .driveArrowBtn:hover {
+  background-color: var(--hover-bg) !important;
+  border-radius: 8px;
+}
+
+/* Fix for File Type Badges (pdf, jpg, etc.) */
+.dark-mode .fileType {
+  background-color: var(--icon-bg) !important;
+  color: var(--text) !important;
+  border: 1px solid var(--border) !important;
 }

@@ -1,7 +1,7 @@
 // src/components/PrivateRoute.jsx
 import React from "react";
 import { Navigate } from "react-router-dom";
-import { auth } from "./firebase";
+import { auth } from "../firebase";
 
 /**
  * PrivateRoute v6 - simple wrapper component.

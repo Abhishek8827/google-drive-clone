@@ -66,10 +66,10 @@ body, html, #root {
 .googleBtn {
   display: inline-flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   width: 100%;
-  padding: 10px 12px;
-  border-radius: 8px;
+  padding: 5px 12px;
+  border-radius: 50px;
   border: 1px solid var(--input-border);
   background: #fff;
   cursor: pointer;
@@ -96,7 +96,7 @@ body, html, #root {
 .googleText {
   flex: 1;
   text-align: center;
-  font-size: 14px;
+  font-size: 18px;
 }
 
 /* divider */
@@ -148,9 +148,10 @@ body, html, #root {
 .formActions {
   display: flex;
   gap: 12px;
-  justify-content: flex-end;
+  justify-content: center;
+  flex-direction:column;
   align-items: center;
-  margin-top: 6px;
+  margin-top: 16px;
 }
 
 .primaryBtn {
@@ -191,5 +192,3 @@ body, html, #root {
   .authCard { padding: 22px; width: 100%; border-radius: 12px; }
   .authLogo { width: 64px; height: 64px; }
 }
-
-

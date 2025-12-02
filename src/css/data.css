@@ -1,3 +1,5 @@
+/* src/css/data.css */
+
 .data {
   flex: 1;
   padding: 10px 10px 0 20px;
@@ -6,6 +8,10 @@
   border-top: 20px solid white;
   position: relative;
   background: white;
+  
+  /* --- NEW SCROLL FIX --- */
+  overflow-y: auto;  /* Enables vertical scrolling */
+  height: 100%;      /* Forces container to respect parent height */
 }
 
 .data_header {
@@ -15,7 +21,10 @@
   padding: 10px;
   border-bottom: 1px solid lightgray;
   height: 56px;
-  position: relative;
+ position: sticky;
+  top: 0;
+  background: inherit; /* Matches the white/dark background automatically */
+  z-index: 10;
 }
 
 .data_headerLeft {
@@ -1055,4 +1064,176 @@
   display: inline-flex;
   vertical-align: middle;
   margin-right: 8px;
+}
+
+/* --- CONTEXT MENU (Right Click) --- */
+.context-menu {
+  position: fixed;
+  background: white;
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  border-radius: 4px;
+  padding: 4px 0;
+  z-index: 9999;
+  width: 200px;
+  animation: fadeIn 0.1s ease-out;
+}
+
+.context-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 16px;
+  font-size: 14px;
+  color: var(--text);
+  cursor: pointer;
+  transition: background 0.1s;
+}
+
+.context-item:hover {
+  background-color: var(--hover-bg);
+}
+
+.context-item .material-symbols-outlined {
+  font-size: 18px;
+  color: var(--muted);
+}
+
+.context-item.danger {
+  color: #d93025;
+}
+.context-item.danger .material-symbols-outlined {
+  color: #d93025;
+}
+
+.context-separator {
+  height: 1px;
+  background: var(--border);
+  margin: 4px 0;
+}
+
+/* Selected state for files */
+.data_file.selected, .detailsRow.selected {
+  background-color: #e8f0fe !important;
+  border-color: #1967d2 !important;
+}
+.dark-mode .data_file.selected, .dark-mode .detailsRow.selected {
+  background-color: rgba(138, 180, 248, 0.15) !important;
+  border-color: #8ab4f8 !important;
+}
+
+/* --- UPDATED GRID LAYOUT --- */
+.data_grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  gap: 25px;
+  padding: 20px 0;
+}
+
+/* Uniform Card Size */
+/* --- UPDATED GRID LAYOUT (Compact & User Friendly) --- */
+.data_grid {
+  display: grid;
+  /* Min width 180px prevents them from getting too huge or too tiny */
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 16px;
+  padding: 20px 0;
+}
+
+/* Card Container */
+.data_file {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 10px; /* Slightly smaller radius */
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  height: 190px; /* Reduced height for a cleaner look */
+  transition: box-shadow 0.2s, transform 0.1s, background-color 0.1s;
+  overflow: hidden;
+  position: relative;
+}
+
+.data_file:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  z-index: 1;
+}
+
+/* Selected state highlight */
+.data_file.selected {
+  background-color: #e8f0fe !important;
+  border-color: #1967d2 !important;
+}
+.dark-mode .data_file.selected {
+  background-color: rgba(138, 180, 248, 0.15) !important;
+  border-color: #8ab4f8 !important;
+}
+
+/* Thumbnail Area */
+.thumbWrap {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f8f9fa;
+  overflow: hidden;
+  padding: 12px; /* Padding keeps icon from touching edges */
+}
+.dark-mode .thumbWrap {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Footer (Filename) */
+.data_file p {
+  height: 48px; /* Standard footer height */
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  font-size: 13px; /* Slightly smaller font for file names */
+  font-weight: 500;
+  border-top: 1px solid var(--border);
+  background: var(--card-bg);
+  color: var(--text);
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* --- DOCUMENT ICONS STYLING --- */
+.fileIcon {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Reduced Icon Size (User Friendly) */
+.fileIcon .material-symbols-outlined {
+  font-size: 64px; /* Reduced from 80px to 64px */
+}
+
+/* Specific Colors for File Types */
+.fileIcon--pdf { color: #ea4335; }   /* Google Red */
+.fileIcon--word { color: #4285f4; }  /* Google Blue */
+.fileIcon--excel { color: #34a853; } /* Google Green */
+.fileIcon--ppt { color: #f4b400; }   /* Google Yellow */
+.fileIcon--video { color: #ea4335; } 
+.fileIcon--audio { color: #a142f4; } 
+.fileIcon--generic { color: var(--muted); }
+
+/* Images */
+.fileThumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+
+.dark-mode .context-menu {
+  background: #1e1e1e;
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
 }
